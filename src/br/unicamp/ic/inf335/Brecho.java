@@ -7,40 +7,27 @@ import br.unicamp.ic.inf335.beans.ProdutoBean;
 
 public class Brecho {
 
-	private static ArrayList<ProdutoBean> produtos = new ArrayList<ProdutoBean>();
-	
-	public static void main(String[] args) {
-		ProdutoBean nProg = new ProdutoBean("CD00001","Celular Galaxy S10", "128 Gb, Preto, com Carregador",1250.0,"Poucos riscos, estado de novo.");
-		nProg = new ProdutoBean("CD00002","Prod 2 ...", "Bla Bla Bla",1100.0,"Bla Bla Bla");
-		nProg = new ProdutoBean("CD00003","Prod 3 ...", "Bla Bla Bla",120.0,"Bla Bla Bla");
-		nProg = new ProdutoBean("CD00004","Prod 4 ...", "Bla Bla Bla",1300.0,"Bla Bla Bla");
-		nProg = new ProdutoBean("CD00005","Prod 5 ...", "Bla Bla Bla",9400.0,"Bla Bla Bla");
-		nProg = new ProdutoBean("CD00006","Prod 6 ...", "Bla Bla Bla",1500.0,"Bla Bla Bla");
-		produtos.add(nProg);
-		
-		// Imprime produtos
-		for (int i=1; i<=produtos.size(); i++) {
-			System.out.println("Codigo = " + produtos.get(i).getCodigo() + " Nome = " + produtos.get(i).getNome() + " Valor = " + produtos.get(i).getValor());
-		}
-		
-		// Ordena produtos
-		Collections.sort(produtos);
-		
-		System.out.println("-------------------- Produtos Ordenados -------------------");
-		// Imprime produtos ordenados
-		for (int i=1; i<=produtos.size(); i++) {
-			System.out.println("Codigo = " + produtos.get(i).getCodigo() + " Nome = " + produtos.get(i).getNome() + " Valor = " + produtos.get(i).getValor());
-		}
-		
-		// Calcula M�dia
-		Double media = 0.0;
-		int i = 1;
-		while (i<=produtos.size()) {
-			media = produtos.get(i).getValor();
-			i++;
-		}
-		media = media / i;
-		System.out.println("Media de Valores = " + media);
-	}
+    private static final ArrayList<ProdutoBean> produtos = new ArrayList<>();
 
+    public static void main(String[] args) {
+        produtos.add(new ProdutoBean("CD00001","Celular Galaxy S10", "128 Gb, Preto, com Carregador",1250.0,"Poucos riscos, bom estado de conservacao."));
+        produtos.add(new ProdutoBean("CD00002","iPhone 11", "256 Gb, Preto, sem Carregador",4000.0,"Sem riscos, pouco usado."));
+        produtos.add(new ProdutoBean("CD00003","Xaomi 7", "64 Gb, Branco, com Carregador",1000.0,"Muitos riscos, bastante desgastado."));
+        produtos.add(new ProdutoBean("CD00004","Notebook Sony Vaio 10", "16 Gb, Prata, com Carregador",1500.0,"Razoável estado de conservação."));
+        produtos.add(new ProdutoBean("CD00005","Notebook Acer 3", "4 Gb, Preto, com Carregador",750.0,"Bem antigo, porém conservado."));
+        produtos.add(new ProdutoBean("CD00006","Notebook Hp Compaq", "8 Gb, Prata, com Carregador",500.0,"Bem antigo, estado médio de conservação."));
+
+        // Imprime produtos
+        produtos.forEach(p -> System.out.println("Codigo = " + p.getCodigo() + "; Nome = " + p.getNome() + "; Valor = " + p.getValor()));
+
+        // Ordena produtos
+        Collections.sort(produtos);
+
+        // Imprime produtos ordenados
+        System.out.println("-------------------- Produtos Ordenados -------------------");
+        produtos.forEach(p -> System.out.println("Codigo = " + p.getCodigo() + "; Nome = " + p.getNome() + "; Valor = " + p.getValor()));
+
+        // Calcula Media
+        System.out.println("Media de Valores = " + produtos.stream().mapToDouble(ProdutoBean::getValor).average());
+    }
 }
